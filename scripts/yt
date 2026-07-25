@@ -1,0 +1,97 @@
+#!/data/data/com.termux/files/usr/bin/bash
+
+#########################################
+#            YT-DLP v1.0.0
+#########################################
+
+BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+source "$BASE_DIR/banner.sh"
+source "$BASE_DIR/check.sh"
+source "$BASE_DIR/utils.sh"
+source "$BASE_DIR/download.sh"
+source "$BASE_DIR/audio.sh"
+source "$BASE_DIR/formats.sh"
+source "$BASE_DIR/update.sh"
+
+VERSION="1.0.0"
+
+main_menu() {
+
+    while true
+    do
+
+        banner
+
+        echo "Versión: $VERSION"
+        echo
+
+        check_system
+
+        echo "1) 📹 Descargar video"
+        echo "2) 🎵 Descargar MP3"
+        echo "3) 📋 Ver formatos"
+        echo "4) 🔄 Actualizar yt-dlp"
+        echo "5) ℹ️ Información"
+        echo "6) ❌ Salir"
+
+        echo
+
+        read -p "Opción: " option
+
+        case "$option" in
+
+            1)
+                download_video
+            ;;
+
+            2)
+                download_audio
+            ;;
+
+            3)
+                show_formats
+            ;;
+
+            4)
+                update_program
+            ;;
+
+            5)
+
+                clear
+                banner
+
+                echo "Proyecto : YT-DLP"
+                echo "Versión  : $VERSION"
+                echo
+                echo "Interfaz para yt-dlp en Termux."
+                echo
+                echo "Autor: Daniel Garrido"
+                echo
+
+                read -p "Pulsa ENTER para volver..."
+
+            ;;
+
+            6)
+                clear
+                echo "¡Hasta luego!"
+                exit
+            ;;
+
+            *)
+
+                echo
+                echo "❌ Opción inválida."
+                sleep 1
+
+            ;;
+
+        esac
+
+    done
+
+}
+
+main_menu
