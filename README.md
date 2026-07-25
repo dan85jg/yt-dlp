@@ -2,7 +2,7 @@
 
 ## Captura
 
-![YT-DLP](screenshots/menu.png)
+![YT-DLP](screenshots/menu.jpeg)
 
 Una interfaz interactiva para **yt-dlp** diseñada para **Termux** en Android.
 
