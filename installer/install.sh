@@ -167,7 +167,16 @@ echo "✓ Widget creado."
 chmod +x "$HOME"/Scripts/*.sh
 chmod +x "$HOME"/Scripts/yt
 
+cat > "$PREFIX/bin/yt" << EOF
+#!/data/data/com.termux/files/usr/bin/bash
+
+bash \$HOME/Scripts/yt
+EOF
+
+chmod +x "$PREFIX/bin/yt"
+
 echo "✓ Permisos configurados."
+echo "✓ Comando 'yt' instalado."
 
 ############################################
 # Solicitar acceso al almacenamiento
