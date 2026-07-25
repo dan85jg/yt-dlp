@@ -33,22 +33,6 @@ fi
 echo "✓ Termux detectado"
 
 ############################################
-# Verificar Termux:API
-############################################
-
-if ! command -v termux-toast >/dev/null 2>&1; then
-    echo
-    echo "========================================="
-    echo "❌ HACE FALTA LA APP TERMUX:API"
-    echo
-    echo "Instálala y vuelve a ejecutar este instalador."
-    echo "========================================="
-    exit 1
-fi
-
-echo "✓ Termux:API"
-
-############################################
 # Preparar carpeta del Widget
 ############################################
 
@@ -56,10 +40,32 @@ mkdir -p "$HOME/.shortcuts"
 
 echo "✓ Carpeta para Widget preparada"
 
-echo
-echo "Todas las verificaciones fueron correctas."
+############################################
+# Confirmación
+############################################
 
-read -p "Pulsa ENTER para continuar..."
+echo
+echo "Este instalador realizará las siguientes acciones:"
+echo
+echo "  ✓ Instalar dependencias necesarias"
+echo "  ✓ Instalar yt-dlp"
+echo "  ✓ Copiar los scripts"
+echo "  ✓ Crear la configuración"
+echo "  ✓ Crear el widget"
+echo "  ✓ Solicitar permisos de almacenamiento"
+echo
+
+read -p "¿Deseas continuar? [S/n]: " respuesta
+
+case "$respuesta" in
+    ""|S|s|SI|Si|si|Y|y|YES|Yes|yes)
+        ;;
+    *)
+        echo
+        echo "Instalación cancelada."
+        exit 0
+        ;;
+esac
 
 ############################################
 # Crear carpetas
@@ -76,7 +82,7 @@ echo "✓ Carpetas creadas."
 # Instalar dependencias
 ############################################
 
-step "[2/6] Verificando dependencias..."
+step "[2/6] Instalando dependencias..."
 
 pkg update -y
 
@@ -91,14 +97,12 @@ termux-api
 
 for paquete in "${DEPENDENCIAS[@]}"
 do
-
     if pkg list-installed | grep -q "^${paquete}/"; then
         echo "✓ $paquete"
     else
         echo "Instalando $paquete..."
         pkg install -y "$paquete"
     fi
-
 done
 
 ############################################
@@ -154,12 +158,24 @@ EOF
 
 chmod +x "$HOME/.shortcuts/yt"
 
+echo "✓ Widget creado."
+
 ############################################
 # Dar permisos
 ############################################
 
 chmod +x "$HOME"/Scripts/*.sh
 chmod +x "$HOME"/Scripts/yt
+
+echo "✓ Permisos configurados."
+
+############################################
+# Solicitar acceso al almacenamiento
+############################################
+
+step "Solicitando permisos de almacenamiento..."
+
+termux-setup-storage
 
 ############################################
 # Finalizar
@@ -178,9 +194,24 @@ echo "Comando disponible:"
 echo
 echo "    yt"
 echo
-echo "También puedes usar el widget de Android."
+
+echo "========================================="
+echo "Funciones opcionales"
+echo "========================================="
 echo
-echo "NOTA:"
-echo "Si el widget no aparece, instala la aplicación"
-echo "\"Termux:Widget\" y añádelo desde la pantalla de inicio."
+
+if command -v termux-toast >/dev/null 2>&1; then
+    echo "✓ Termux:API detectado."
+else
+    echo "⚠ Instala la aplicación Termux:API para habilitar:"
+    echo "  • Notificaciones"
+    echo "  • Vibración"
+    echo
+fi
+
+echo "⚠ Para ejecutar YT-DLP desde un widget del escritorio,"
+echo "  instala la aplicación Termux:Widget."
+echo
+
+echo "¡Disfruta YT-DLP!"
 echo
