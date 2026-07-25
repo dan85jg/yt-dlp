@@ -218,7 +218,7 @@ else
     echo
 fi
 
-echo "⚠ Para ejecutar YT-DLP desde un widget del escritorio,"
+echo "ℹ Si deseas ejecutar YT-DLP desde un widget del escritorio,"
 echo "  instala la aplicación Termux:Widget."
 echo
 
