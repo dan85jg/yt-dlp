@@ -9,10 +9,13 @@ fi
 
 clipboard_url() {
 
-    PORTAPAPELES=$(termux-clipboard-get 2>/dev/null)
+    PORTAPAPELES=""
+
+    if command -v timeout >/dev/null 2>&1; then
+        PORTAPAPELES=$(timeout 2 termux-clipboard-get 2>/dev/null || true)
+    fi
 
     if [[ "$PORTAPAPELES" =~ ^https?:// ]]; then
-
         echo
         echo "📋 URL encontrada:"
         echo "$PORTAPAPELES"
@@ -25,10 +28,7 @@ clipboard_url() {
         else
             read -p "Pega la URL: " url
         fi
-
     else
-
         read -p "Pega la URL: " url
-
     fi
 }
