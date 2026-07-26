@@ -10,8 +10,8 @@ download_audio() {
         --audio-format "$AUDIO_FORMAT" \
         "$url"
 
-    termux-vibrate
-    termux-toast "✅ MP3 descargado"
+    safe_vibrate
+    safe_toast "✅ MP3 descargado"
 
     read -p "Pulsa ENTER para continuar..."
 

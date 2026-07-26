@@ -61,8 +61,8 @@ download_video() {
 
     esac
 
-    termux-vibrate
-    termux-toast "✅ Descarga finalizada"
+    safe_vibrate
+    safe_toast "✅ Descarga finalizada"
 
     read -p "Pulsa ENTER para continuar..."
 
