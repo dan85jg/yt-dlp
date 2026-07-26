@@ -37,7 +37,7 @@ chmod +x installer/install.sh
 
 ## Uso
 
-Después de instalar:
+Después de instalar, ejecutar en la consala de Termux (si se instalo Termux:widget se puede agregar el acceso directo al celular y omitir este paso siempre):
 
 ```bash
 yt
