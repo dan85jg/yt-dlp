@@ -64,3 +64,8 @@ yt-dlp/
 ## Licencia
 
 Proyecto de código abierto bajo licencia MIT.
+
+
+
+
+**Este trabajo fue echo con ayuda de IA**
