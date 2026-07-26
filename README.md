@@ -1,4 +1,4 @@
-# YT-DLP PARA ANDROID
+# YT-DLP para Android
 
 ## Captura
 
@@ -11,59 +11,73 @@ Una interfaz interactiva para **yt-dlp** diseñada para **Termux** en Android.
 - 📹 Descargar videos.
 - 🎵 Descargar audio en MP3.
 - 📋 Ver formatos disponibles.
-- 🔄 Actualizar yt-dlp.
+- 🔄 Actualizar automáticamente la aplicación.
 - 📱 Compatible con Termux.
 - ⚡ Instalación automática.
 
+---
+
 ## Requisitos
 
-- Termux
-- Termux:API (opcional, para notificaciones y vibración)
-- Termux:Widget (opcional, para ejecutar desde un widget)
+- Termux (se recomienda la versión de F-Droid)
+- Conexión a Internet
+- Termux:API (opcional, para usar el portapapeles, vibración y notificaciones)
+- Termux:Widget (opcional, para ejecutar la aplicación desde un acceso directo)
 
-## Instalación
+---
 
-## Primero instalamos git
+# Instalación
+
+## 1. Actualizar Termux
+
+Antes de instalar la aplicación es recomendable actualizar todos los paquetes:
 
 ```bash
-pkg install git
+pkg update -y
+pkg upgrade -y
 ```
 
-## Ahora clonamos el repositorio
+## 2. Instalar Git
+
+```bash
+pkg install git -y
+```
+
+## 3. Clonar el repositorio
 
 ```bash
 git clone https://github.com/dan85jg/yt-dlp.git
 ```
 
-## Entramos a la carpeta creada en el celular
+## 4. Entrar al proyecto
 
 ```bash
 cd yt-dlp
 ```
 
-## Le damos permisos al instalador
+## 5. Ejecutar el instalador
 
 ```bash
-chmod +x installer/install.sh
+bash installer/install.sh
 ```
 
-## Ejecutamos el instalador
-
-```bash
-./installer/install.sh
-```
+---
 
 ## Uso
 
-Después de instalar, ejecutar en la consala de Termux (si se instalo Termux:widget se puede agregar el acceso directo al celular y omitir este paso siempre):
+Una vez instalada la aplicación, basta con ejecutar:
 
 ```bash
 yt
 ```
 
+Si tienes instalada la aplicación **Termux:Widget**, puedes crear un acceso directo y abrir YT-DLP directamente desde la pantalla de inicio.
+
+---
+
 ## Estructura del proyecto
 
-```
+```text
 yt-dlp/
 ├── installer/
 │   └── install.sh
@@ -76,14 +90,20 @@ yt-dlp/
 │   ├── formats.sh
 │   ├── update.sh
 │   └── utils.sh
+├── VERSION
 └── README.md
 ```
+
+---
 
 ## Licencia
 
 Proyecto de código abierto bajo licencia MIT.
 
+---
 
+## Créditos
 
+Este proyecto fue desarrollado por Daniel Garrido.
 
-**Este trabajo fue echo con ayuda de IA**
+Parte del desarrollo, pruebas y documentación se realizó con ayuda de inteligencia artificial.
