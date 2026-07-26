@@ -1,7 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 #########################################
-#            YT-DLP v1.0.0
+#            YT-DLP 
 #########################################
 
 BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
