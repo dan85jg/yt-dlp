@@ -48,8 +48,8 @@ echo
 echo "Este instalador realizará las siguientes acciones:"
 echo
 echo "  ✓ Instalar dependencias necesarias"
-echo "  ✓ Instalar yt-dlp"
-echo "  ✓ Copiar los scripts"
+echo "  ✓ Instalar o actualizar yt-dlp"
+echo "  ✓ Copiar el proyecto"
 echo "  ✓ Crear la configuración"
 echo "  ✓ Crear el widget"
 echo "  ✓ Solicitar permisos de almacenamiento"
@@ -73,7 +73,7 @@ esac
 
 step "[1/6] Creando carpetas..."
 
-mkdir -p "$HOME/Scripts"
+mkdir -p "$HOME/YT-DLP"
 mkdir -p "$HOME/.config/yt-dlp"
 
 echo "✓ Carpetas creadas."
@@ -93,6 +93,7 @@ jq
 figlet
 toilet
 termux-api
+git
 )
 
 for paquete in "${DEPENDENCIAS[@]}"
@@ -106,35 +107,42 @@ do
 done
 
 ############################################
-# Verificar yt-dlp
+# Instalar o actualizar yt-dlp
 ############################################
 
-step "[3/6] Verificando yt-dlp..."
+step "[3/6] Instalando/Actualizando yt-dlp..."
+
+pip install -U yt-dlp
 
 if command -v yt-dlp >/dev/null 2>&1; then
-    echo "✓ yt-dlp"
+    echo "✓ yt-dlp listo."
 else
-    echo "Instalando yt-dlp..."
-    pip install -U yt-dlp
+    echo
+    echo "❌ No fue posible instalar yt-dlp."
+    exit 1
 fi
 
 ############################################
-# Copiar scripts
+# Copiar proyecto
 ############################################
 
-step "[4/6] Copiando scripts..."
+step "[4/6] Copiando proyecto..."
 
-SCRIPT_DIR="$(cd "$(dirname "$0")/../scripts" && pwd)"
+PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-cp "$SCRIPT_DIR"/* "$HOME/Scripts/"
+mkdir -p "$HOME/YT-DLP"
 
-echo "✓ Scripts copiados."
+cp -a "$PROJECT_DIR"/. "$HOME/YT-DLP/"
+
+echo "✓ Proyecto copiado."
 
 ############################################
 # Crear configuración
 ############################################
 
 step "[5/6] Creando configuración..."
+
+if [ ! -f "$HOME/.config/yt-dlp/config" ]; then
 
 cat > "$HOME/.config/yt-dlp/config" << EOF
 DOWNLOAD_DIR=\$HOME/storage/downloads
@@ -145,6 +153,11 @@ EOF
 
 echo "✓ Configuración creada."
 
+else
+
+echo "✓ Configuración existente conservada."
+
+fi
 ############################################
 # Crear Widget
 ############################################
@@ -154,7 +167,7 @@ step "[6/6] Creando Widget..."
 cat > "$HOME/.shortcuts/yt" << EOF
 #!/data/data/com.termux/files/usr/bin/bash
 
-bash \$HOME/Scripts/yt
+bash \$HOME/YT-DLP/scripts/yt
 EOF
 
 chmod +x "$HOME/.shortcuts/yt"
@@ -165,13 +178,13 @@ echo "✓ Widget creado."
 # Dar permisos
 ############################################
 
-chmod +x "$HOME"/Scripts/*.sh
-chmod +x "$HOME"/Scripts/yt
+chmod +x "$HOME"/YT-DLP/scripts/*.sh
+chmod +x "$HOME"/YT-DLP/scripts/yt
 
 cat > "$PREFIX/bin/yt" << EOF
 #!/data/data/com.termux/files/usr/bin/bash
 
-bash \$HOME/Scripts/yt
+bash \$HOME/YT-DLP/scripts/yt
 EOF
 
 chmod +x "$PREFIX/bin/yt"

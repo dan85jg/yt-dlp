@@ -3,13 +3,13 @@
 update_program() {
 
     echo
-    echo "Actualizando yt-dlp..."
+    echo "Actualizando YT-DLP..."
     echo
 
-    pip install -U yt-dlp
+    cd "$HOME/YT-DLP" || return
 
-    termux-toast "✅ yt-dlp actualizado"
+    git pull
 
-    read -p "Pulsa ENTER para continuar..."
+    bash installer/install.sh
 
 }
