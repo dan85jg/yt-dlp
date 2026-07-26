@@ -23,15 +23,33 @@ Una interfaz interactiva para **yt-dlp** diseñada para **Termux** en Android.
 
 ## Instalación
 
+## Primero instalamos git
+
 ```bash
 pkg install git
+```
 
+## Ahora clonamos el repositorio
+
+```bash
 git clone https://github.com/dan85jg/yt-dlp.git
+```
 
+## Entramos a la carpeta creada en el celular
+
+```bash
 cd yt-dlp
+```
 
+## Le damos permisos al instalador
+
+```bash
 chmod +x installer/install.sh
+```
 
+## Ejecutamos el instalador
+
+```bash
 ./installer/install.sh
 ```
 
