@@ -140,6 +140,7 @@ cat > "$HOME/.config/yt-dlp/config" << EOF
 DOWNLOAD_DIR=\$HOME/storage/downloads
 VIDEO_FORMAT=bv*+ba/b
 AUDIO_FORMAT=mp3
+LAST_UPDATE_CHECK=0
 EOF
 
 echo "✓ Configuración creada."
